@@ -1,0 +1,14 @@
+header {
+    background-image: linear-gradient(to right, rgb(1, 12, 107), rgb(132, 245, 147));
+}
+
+.search-container {
+    margin: 0 1.2rem 0 1.2rem;
+    align-items: flex-start;
+    width: 25%;
+
+}
+
+.search-container h2 {
+    padding: 0;
+}
