@@ -3,7 +3,8 @@ var excludeAlerts = 'Alerts';
 var cityLat;
 var cityLong;
 var cityAPISearch = [];
-var citySearchString = 'Seattle, WA'
+var citySearchString = 'Oakland';
+
 
 var testWeatherAPI = function(cityLat, cityLong) {
     currentWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${excludeAlerts}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
@@ -26,7 +27,11 @@ var testCityAPI = function(city) {
         })
         // .then(data => cityLat = data.data[0].latitude)
 
+};
+
+var userCitySearch = function() {
+    
 }
 
-testCityAPI(citySearchString);
+// testCityAPI(citySearchString);
 // https://api.openweathermap.org/data/2.5/onecall?lat=38.7521&lon=121.2880&exclude=Alerts&appid=APIKey

@@ -13,11 +13,79 @@
         <h1>Weather Dashboard</h1>
     </header>
 
-    <main class="container-fluid">
-        <section class="row flex-column search-container">
-            <h2 class="mt-2 col-12 align-items-left">Search for a city:</h2>
-            <input name="city-search" type="text" placeholder="Enter City Name" class="col-3 justify-content-between rounded w-100"></input>
-            <button class="col-3 bg-primary text-white rounded mt-1 search w-100">Search</button>
+    <main class="container-fluid m-2">
+        <section class="row justify-content-between search-container">
+          <div class="col-3">
+            <div class="pb-3 border-bottom border-dark">
+              <h2 class="mt-2 col-12 p-0 align-items-left">Search for a city:</h2>
+              <input name="city-search" type="text" placeholder="Enter City Name" class="col-3 justify-content-between rounded w-100"></input>
+              <button class="col-3 bg-primary text-white rounded mt-1 search w-100">Search</button>
+            </div>
+
+            <div class="search-history pt-3">
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 1</button>
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 2</button>
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 3</button>
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 4</button>
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 5</button>
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 6</button>
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 7</button>
+              <button class="bg-secondary text-white rounded mt-1 mb-3 w-100">Search Result 8</button>
+            </div>
+          </div>
+            
+          <div class="col-9">
+            <div class="current-weather mt-2 border border-dark p-2">
+              <h2 class="fw-bold current-location">Newark (12/8/2021) <img src="http://openweathermap.org/img/wn/10d@2x.png" width="75" height="75" /></h2>
+              <p class="fw-bold">Temp: 50 F</p>
+              <p class="fw-bold">Wind: 7 MPH</p>
+              <p class="fw-bold">Humidity: 50%</p>
+              <p class="fw-bold">UV Index: 0.40</p>
+            </div>
+  
+            <div class="mt-3 p-2 forecast">
+              <h3 class="fw-bold">5-Day-Forecast:</h3>
+              <div class="d-flex justify-content-between forecast-blocks">
+                <div class="p-2 forecast-day">
+                  <h4>12/9/2021</h4>
+                  <img src="http://openweathermap.org/img/wn/10d@2x.png" width="75" height="75" />
+                  <p>Temp: 55 F</p>
+                  <p>Wind: 9 MPH</p>
+                  <p>Humidity: 40%</p>
+                </div>
+                <div class="p-2 forecast-day">
+                  <h4>12/10/2021</h4>
+                  <img src="http://openweathermap.org/img/wn/10d@2x.png" width="75" height="75" />
+                  <p>Temp: 56 F</p>
+                  <p>Wind: 3 MPH</p>
+                  <p>Humidity: 45%</p>
+                </div>
+                <div class="p-2 forecast-day">
+                  <h4>12/11/2021</h4>
+                  <img src="http://openweathermap.org/img/wn/10d@2x.png" width="75" height="75" />
+                  <p>Temp: 45 F</p>
+                  <p>Wind: 15 MPH</p>
+                  <p>Humidity: 60%</p>
+                </div>
+                <div class="p-2 forecast-day">
+                  <h4>12/12/2021</h4>
+                  <img src="http://openweathermap.org/img/wn/10d@2x.png" width="75" height="75" />
+                  <p>Temp: 70 F</p>
+                  <p>Wind: 5 MPH</p>
+                  <p>Humidity: 70%</p>
+                </div>
+                <div class="p-2 forecast-day">
+                  <h4>12/13/2021</h4>
+                  <img src="http://openweathermap.org/img/wn/10d@2x.png" width="75" height="75" />
+                  <p>Temp: 55 F</p>
+                  <p>Wind: 9 MPH</p>
+                  <p>Humidity: 40%</p>
+                </div>
+              </div>
+              
+
+            </div>
+          </div>
         </section>
     </main>
 
@@ -28,3 +96,6 @@
 	<script src="./assets/js/script.js"></script>
   </body>
 </html>
+
+
+<!--  -->
