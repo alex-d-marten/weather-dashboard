@@ -1,3 +1,4 @@
+// Declare constants and variables
 var currentWeather = [];
 var excludeAlerts = 'Alerts';
 var cityLat;
@@ -5,10 +6,12 @@ var cityLong;
 var cityAPISearch = [];
 var citySearchString;
 var searchHistory = [];
+var dataSet;
+var dateFormat;
 const searchButtonEl = $('#search');
 const cityInputEl = $('#city-search');
 
-
+// retrieve local storage
 var retrieveHistory = function() {
     storedHistory = JSON.parse(localStorage.getItem('citySearchHistory'));
 
@@ -16,19 +19,27 @@ var retrieveHistory = function() {
         searchHistory = storedHistory;
     }
 }
-
 retrieveHistory();
 
-var testWeatherAPI = function(cityLat, cityLong) {
+// 
+var callWeatherAPI = function(cityLat, cityLong) {
     currentWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${excludeAlerts}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
     fetch(currentWeather)
         .then(response => response.json())
         .then(function(data) {
+            dataSet = data;
             console.log(data);
+            console.log(data.current.dt)
+            var dt = data.current.dt;  
+            // var DateTime = data.current.dt;
+            // DateTime.toLocaleString();
+            // console.log(DateTime)
+            dateFunction(dt);
+            console.log(dateFormat)
         });
 };
 
-var testCityAPI = function(city) {
+var callCityAPI = function(city) {
     cityAPISearch = `http://api.positionstack.com/v1/forward?access_key=${'3f39be56daa79b8f85d50e3d985d6f6d'}&query=${city}`;
     fetch(cityAPISearch)
         .then(response => response.json())
@@ -36,10 +47,16 @@ var testCityAPI = function(city) {
             cityLat = data.data[0].latitude;
             cityLong = data.data[0].longitude;
             console.log(cityLat, cityLong)
-            testWeatherAPI(cityLat, cityLong);
+            callWeatherAPI(cityLat, cityLong);
         })
 
 };
+
+var dateFunction = function(date) {
+    var millseconds = date * 1000;
+    var dateObject = new Date(millseconds);
+    dateFormat = dateObject.toLocaleDateString('en-US');
+}
 
 // function to execute when the search button is clicked
 var userCitySearch = function() {
@@ -47,7 +64,7 @@ var userCitySearch = function() {
     console.log(citySearchString)
     
     if(citySearchString) {
-        // testCityAPI(citySearchString);
+        callCityAPI(citySearchString);
         searchHistory.push(citySearchString);
         localStorage.setItem('citySearchHistory', JSON.stringify(searchHistory));
         populateHistory();
@@ -57,6 +74,16 @@ var userCitySearch = function() {
         alert("Please enter a city.")
     }
 }
+
+// function to render weather condition content
+var renderContent = function() {
+    // render current weather conditions in city searched
+
+    // render the next 5 day forecast
+}
+
+
+
 
 // function to populate search history below search bar
 var populateHistory = function() {
@@ -86,5 +113,5 @@ historyButtonEl.on('click', function(event) {
     const id = event.target.id
     var city = historyButtonEl[id].textContent
     console.log(city);
-    // testCityAPI(city);
+    // callCityAPI(city);
 })
