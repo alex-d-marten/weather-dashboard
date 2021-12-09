@@ -1,13 +1,14 @@
 // Declare constants and variables
 var currentWeather = [];
-var excludeAlerts = 'Alerts';
 var cityLat;
 var cityLong;
 var cityAPISearch = [];
 var citySearchString;
 var searchHistory = [];
 var dataSet;
-var dateFormat;
+var dateFormatCurrent;
+var dateFormatForecast = [];
+var dtForecast;
 const searchButtonEl = $('#search');
 const cityInputEl = $('#city-search');
 
@@ -23,20 +24,34 @@ retrieveHistory();
 
 // 
 var callWeatherAPI = function(cityLat, cityLong) {
-    currentWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${excludeAlerts}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
+    currentWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${'alerts,hourly,minutely'}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
     fetch(currentWeather)
         .then(response => response.json())
         .then(function(data) {
             dataSet = data;
-            console.log(data);
-            console.log(data.current.dt)
-            var dt = data.current.dt;  
+            var dtCurrent = data.current.dt;
+            dtForecast = data.daily;
+            var millsecondsCurrent = dtCurrent * 1000;
+            var dateObjectCurrent = new Date(millsecondsCurrent);
+            dateFormatCurrent = dateObjectCurrent.toLocaleDateString('en-US');
+            console.log(dateFormatCurrent);
             // var DateTime = data.current.dt;
             // DateTime.toLocaleString();
             // console.log(DateTime)
-            dateFunction(dt);
-            console.log(dateFormat)
+            
+            for(var i=1; i < 6; i++) {
+                console.log(dtForecast[i].dt)
+                var millsecondsForecast = dtForecast[i].dt * 1000;
+                var dateObjectForecast = new Date(millsecondsForecast);
+                currentDate = dateObjectForecast.toLocaleDateString('en-US');
+                dateFormatForecast.push(currentDate);
+                console.log(dateFormatForecast);
+
+                // dateFormatForecast = dateFormatForecast.push(currentDate);
+                // console.log(dateFormatForecast)
+            }
         });
+        
 };
 
 var callCityAPI = function(city) {
@@ -52,11 +67,11 @@ var callCityAPI = function(city) {
 
 };
 
-var dateFunction = function(date) {
-    var millseconds = date * 1000;
-    var dateObject = new Date(millseconds);
-    dateFormat = dateObject.toLocaleDateString('en-US');
-}
+// var dateFunction = function(date, dateTime) {
+//     var millseconds = date * 1000;
+//     var dateObject = new Date(millseconds);
+//     dateTime = dateObject.toLocaleDateString('en-US');
+// }
 
 // function to execute when the search button is clicked
 var userCitySearch = function() {
