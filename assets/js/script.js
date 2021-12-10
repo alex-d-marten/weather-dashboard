@@ -93,6 +93,22 @@ var userCitySearch = function() {
 // function to render weather condition content
 var renderContent = function() {
     // render current weather conditions in city searched
+    h2El = $('<h2>');
+    divEl = $('<div>');
+
+    $('<div>').addClass("current-weather mt-2 border border-dark p-2");
+
+    $('<h2>')
+        .addClass("fw-bold current-location")
+        .text(citySearchString + ' ' + dateFormatCurrent)
+        .append('<img src="http://openweathermap.org/img/wn/10d@2x.png" width="75" height="75" />');
+
+    $('<p>')
+        .addClass("fw-bold")
+        .text('Temp: ' + 50F + '<br><br>Wind: ' + 7MPH + '<br><br>Humidity: ' + 50% + '<br><br>UVI: ' + 0.40)
+
+    $('#current-weather-container')
+    
 
     // render the next 5 day forecast
 }
