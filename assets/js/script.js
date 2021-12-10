@@ -5,7 +5,6 @@ var cityLong;
 var cityAPISearch = [];
 var citySearchString;
 var searchHistory = [];
-var dataSet;
 var dateFormatCurrent;
 var dateFormatForecast = [];
 var dtForecast;
@@ -29,14 +28,13 @@ var callWeatherAPI = function(cityLat, cityLong) {
     fetch(currentWeatherAPICall)
         .then(response => response.json())
         .then(function(data) {
-            dataSet = data;
-            console.log(dataSet)
+            console.log(data)
 
             let currentWeather = {
-                temp: dataSet.current.temp,
-                wind: dataSet.current.wind_speed,
-                humidity: dataSet.current.humidity,
-                uvi: dataSet.current.uvi
+                temp: data.current.temp,
+                wind: data.current.wind_speed,
+                humidity: data.current.humidity,
+                uvi: data.current.uvi
             };
 
             var dtCurrent = data.current.dt;
@@ -45,7 +43,7 @@ var callWeatherAPI = function(cityLat, cityLong) {
             var dateObjectCurrent = new Date(millsecondsCurrent);
             dateFormatCurrent = dateObjectCurrent.toLocaleDateString('en-US');
 
-            renderContent(currentWeather, dataSet);
+            renderCurrentWeatherContent(currentWeather, data);
 
             for(var i=1; i < 6; i++) {
                 var millsecondsForecast = dtForecast[i].dt * 1000;
@@ -53,6 +51,8 @@ var callWeatherAPI = function(cityLat, cityLong) {
                 currentDate = dateObjectForecast.toLocaleDateString('en-US');
                 dateFormatForecast.push(currentDate);
             }
+
+            renderForecastContent(data, dateFormatForecast);
         });
         
 };
@@ -86,8 +86,8 @@ var userCitySearch = function() {
 }
 
 // function to render weather condition content
-var renderContent = function(currentWeather, dataSet) {
-    // $('#current-weather-container').empty();
+var renderCurrentWeatherContent = function(currentWeather, data) {
+    $('#current-weather-container').empty();
     // render current weather conditions in city searched
     const h2El = $('<h2>');
     const divEl = $('<div>');
@@ -103,7 +103,7 @@ var renderContent = function(currentWeather, dataSet) {
     h2El
         .addClass("fw-bold current-location")
         .text(citySearchString + ' ' + dateFormatCurrent)
-        .append(`<img src="http://openweathermap.org/img/wn/${dataSet.current.weather[0].icon}@2x.png" width="75" height="75" />`);
+        .append(`<img src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png" width="75" height="75" />`);
     divEl.append(h2El);
 
     pEl1
@@ -126,9 +126,46 @@ var renderContent = function(currentWeather, dataSet) {
         .text('UVI: ' + `${currentWeather.uvi}`)
     divEl.append(pEl4);
     $('#current-weather-container').prepend(divEl);
+}
+
+var renderForecastContent = function(data, forecastDates) {
+    const divForecastEl = $('<div>');
+    const divForecastBlocksEl = $('<div>');
+    const h3El = $('<h3>');
     
 
-    // render the next 5 day forecast
+    // start loop at 1 as first value in daily array is the current date
+    for(var i = 1; i < 6; i++) {
+        const h4El = $('<h4>');
+        const divForecastDayEl = $('<div>');
+        const pEl1 = $('<p>');
+        const pEl2 = $('<p>');
+        const pEl3 = $('<p>');
+        let imageString;
+
+        h4El.text(forecastDates[i-1]);
+        imageString = `<img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" width="75" height="75" />`
+        pEl1.text('Temp: ' + `${data.daily[i].temp.day}` + '\u00B0F')
+        pEl2.text('Wind: ' + `${data.daily[i].wind_speed}` + 'MPH')
+        pEl3.text('Humidity: ' + `${data.daily[i].humidity}` + '%')
+
+        divForecastDayEl
+            .addClass('p-2 forecast-day')
+            .append(h4El, imageString, pEl1, pEl2, pEl3) 
+
+        divForecastBlocksEl
+            .addClass('d-flex justify-content-between forecast-blocks')
+            .append(divForecastDayEl)
+
+        h3El
+            .addClass('fw-bold')
+            .text('5-Day Forecast:')
+        divForecastEl
+            .addClass('mt-3 p-2 forecast')
+            .append(h3El, divForecastBlocksEl)
+
+        $('#current-weather-container').append(divForecastEl);
+    }
 }
 
 
