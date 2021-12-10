@@ -154,7 +154,7 @@ var renderForecastContent = function(data, forecastDates) {
             .append(h4El, imageString, pEl1, pEl2, pEl3) 
 
         divForecastBlocksEl
-            .addClass('d-flex justify-content-between forecast-blocks')
+            .addClass('d-sm-flex flex-sm-column d-md-flex flex-md-row justify-content-md-between forecast-blocks')
             .append(divForecastDayEl)
 
         h3El
@@ -172,7 +172,7 @@ var renderForecastContent = function(data, forecastDates) {
 // function to populate search history below search bar
 var populateHistory = function() {
     var searchHistoryEl = $('.search-history');
-    // searchHistoryEl.empty();
+    searchHistoryEl.empty();
     for(var i=0; i < searchHistory.length; i++) {
         var city = searchHistory[i];
 
@@ -197,6 +197,7 @@ historyButtonEl.on('click', function(event) {
     const id = event.target.id
     var city = historyButtonEl[id].textContent
     console.log(city);
-    // callCityAPI(city);
+    citySearchString = city;
+    callCityAPI(city);
 })
 
