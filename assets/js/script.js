@@ -181,26 +181,26 @@ var populateHistory = function() {
     searchHistoryEl.empty();
     for(var i=0; i < searchHistory.length; i++) {
         var city = searchHistory[i];
-
         const buttonEl = $('<button>')
             .addClass('bg-secondary text-white rounded mt-1 mb-3 w-100 history-btn')
             .text(city)
             .attr('id', i);
-
         searchHistoryEl.append(buttonEl);
-
     }
+    $('.history-btn').on('click', historyButtonClicked)
+
 }
 populateHistory();
 
 // search button click functionality
 searchButtonEl.on('click', userCitySearch)
-const historyButtonEl = $('.history-btn');
 
-// search history button click functionality
-historyButtonEl.on('click', function(event) {
+var historyButtonClicked = function(event) {
     const id = event.target.id
-    var city = historyButtonEl[id].textContent
+    var city = $('.history-btn')[id].textContent
     citySearchString = city;
     callCityAPI(city);
-})
+}
+
+// search history button click functionality
+$('.history-btn').on('click', historyButtonClicked)
