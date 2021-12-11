@@ -22,7 +22,7 @@ retrieveHistory();
 
 // function to gather weather conditions based on the city lat and long provided from the geocoding api
 var callWeatherAPI = function(cityLat, cityLong) {
-    var currentWeatherAPICall = `http://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${'alerts,hourly,minutely'}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
+    var currentWeatherAPICall = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${'alerts,hourly,minutely'}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
     fetch(currentWeatherAPICall)
         .then(response => response.json())
         .then(function(data) {
@@ -52,12 +52,12 @@ var callWeatherAPI = function(cityLat, cityLong) {
 
 // function to gather city lat and long to use in the openweather api
 var callCityAPI = function(city) {
-    cityAPISearch = `http://api.positionstack.com/v1/forward?access_key=${'3f39be56daa79b8f85d50e3d985d6f6d'}&query=${city}`;
+    cityAPISearch = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=94e32ddc97880c45b19a69dfc85aec8d`;
     fetch(cityAPISearch)
         .then(response => response.json())
         .then(function(data) {
-            cityLat = data.data[0].latitude;
-            cityLong = data.data[0].longitude;
+            cityLat = data[0].lat;
+            cityLong = data[0].lon;
             callWeatherAPI(cityLat, cityLong);
         })
 };
