@@ -93,7 +93,7 @@ var renderCurrentWeatherContent = function(currentWeather, data) {
     h2El
         .addClass("fw-bold current-location")
         .text(citySearchString + ' ' + dateFormatCurrent)
-        .append(`<img src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png" width="75" height="75" />`);
+        .append(`<img src="https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png" width="75" height="75" />`);
     divEl.append(h2El);
 
     pEl1
@@ -145,7 +145,7 @@ var renderForecastContent = function(data, forecastDates) {
         let imageString;
 
         h4El.text(forecastDates[i-1]);
-        imageString = `<img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" width="75" height="75" />`
+        imageString = `<img src="https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" width="75" height="75" />`
         pEl1.text('Temp: ' + `${data.daily[i].temp.day}` + '\u00B0F')
         pEl2.text('Wind: ' + `${data.daily[i].wind_speed}` + 'MPH')
         pEl3.text('Humidity: ' + `${data.daily[i].humidity}` + '%')
