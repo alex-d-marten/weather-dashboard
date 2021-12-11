@@ -14,7 +14,6 @@ const cityInputEl = $('#city-search');
 // retrieve local storage
 var retrieveHistory = function() {
     storedHistory = JSON.parse(localStorage.getItem('citySearchHistory'));
-
     if (storedHistory) {
         searchHistory = storedHistory;
     }
@@ -39,7 +38,6 @@ var callWeatherAPI = function(cityLat, cityLong) {
             var millsecondsCurrent = dtCurrent * 1000;
             var dateObjectCurrent = new Date(millsecondsCurrent);
             dateFormatCurrent = dateObjectCurrent.toLocaleDateString('en-US');
-
             renderCurrentWeatherContent(currentWeather, data);
 
             for(var i=1; i < 6; i++) {
@@ -48,7 +46,6 @@ var callWeatherAPI = function(cityLat, cityLong) {
                 currentDate = dateObjectForecast.toLocaleDateString('en-US');
                 dateFormatForecast.push(currentDate);
             }
-
             renderForecastContent(data, dateFormatForecast);
         });
 };
@@ -68,7 +65,6 @@ var callCityAPI = function(city) {
 // function to execute when the search button is clicked
 var userCitySearch = function() {
     citySearchString = cityInputEl[0].value;
-    
     if(citySearchString) {
         callCityAPI(citySearchString);
         searchHistory.push(citySearchString);
@@ -91,8 +87,6 @@ var renderCurrentWeatherContent = function(currentWeather, data) {
     const pEl2 = $('<p>');
     const pEl3 = $('<p>');
     const pEl4 = $('<p>');
-    
-    const brEl = $('<br>');
 
     divEl.addClass("current-weather mt-2 border border-dark p-2");
 
@@ -120,6 +114,7 @@ var renderCurrentWeatherContent = function(currentWeather, data) {
     pEl4
         .addClass('fw-bold')
         .text('UVI: ' + `${currentWeather.uvi}`)
+
     if(currentWeather.uvi <= 2) {
         pEl4.addClass('text-success');
     }
@@ -129,6 +124,7 @@ var renderCurrentWeatherContent = function(currentWeather, data) {
     else {
         pEl4.addClass('text-danger')
     }
+
     divEl.append(pEl4);
     $('#current-weather-container').prepend(divEl);
 }
@@ -138,7 +134,6 @@ var renderForecastContent = function(data, forecastDates) {
     const divForecastEl = $('<div>');
     const divForecastBlocksEl = $('<div>');
     const h3El = $('<h3>');
-    
 
     // start loop at 1 as first value in daily array is the current date
     for(var i = 1; i < 6; i++) {
@@ -174,7 +169,6 @@ var renderForecastContent = function(data, forecastDates) {
     }
 }
 
-
 // function to populate search history below search bar
 var populateHistory = function() {
     var searchHistoryEl = $('.search-history');
@@ -188,7 +182,6 @@ var populateHistory = function() {
         searchHistoryEl.append(buttonEl);
     }
     $('.history-btn').on('click', historyButtonClicked)
-
 }
 populateHistory();
 
