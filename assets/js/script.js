@@ -8,7 +8,6 @@ var searchHistory = [];
 var dateFormatCurrent;
 var dateFormatForecast = [];
 var dtForecast;
-
 const searchButtonEl = $('#search');
 const cityInputEl = $('#city-search');
 
@@ -22,14 +21,12 @@ var retrieveHistory = function() {
 }
 retrieveHistory();
 
-// 
+// function to gather weather conditions based on the city lat and long provided from the geocoding api
 var callWeatherAPI = function(cityLat, cityLong) {
     var currentWeatherAPICall = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${'alerts,hourly,minutely'}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
     fetch(currentWeatherAPICall)
         .then(response => response.json())
         .then(function(data) {
-            console.log(data)
-
             let currentWeather = {
                 temp: data.current.temp,
                 wind: data.current.wind_speed,
@@ -54,9 +51,9 @@ var callWeatherAPI = function(cityLat, cityLong) {
 
             renderForecastContent(data, dateFormatForecast);
         });
-        
 };
 
+// function to gather city lat and long to use in the openweather api
 var callCityAPI = function(city) {
     cityAPISearch = `http://api.positionstack.com/v1/forward?access_key=${'3f39be56daa79b8f85d50e3d985d6f6d'}&query=${city}`;
     fetch(cityAPISearch)
@@ -66,7 +63,6 @@ var callCityAPI = function(city) {
             cityLong = data.data[0].longitude;
             callWeatherAPI(cityLat, cityLong);
         })
-
 };
 
 // function to execute when the search button is clicked
@@ -85,7 +81,7 @@ var userCitySearch = function() {
     }
 }
 
-// function to render weather condition content
+// function to render current weather condition content
 var renderCurrentWeatherContent = function(currentWeather, data) {
     $('#current-weather-container').empty();
     // render current weather conditions in city searched
@@ -128,6 +124,7 @@ var renderCurrentWeatherContent = function(currentWeather, data) {
     $('#current-weather-container').prepend(divEl);
 }
 
+// function to render the forecast content on the page
 var renderForecastContent = function(data, forecastDates) {
     const divForecastEl = $('<div>');
     const divForecastBlocksEl = $('<div>');
@@ -161,7 +158,7 @@ var renderForecastContent = function(data, forecastDates) {
             .addClass('fw-bold')
             .text('5-Day Forecast:')
         divForecastEl
-            .addClass('mt-3 p-2 forecast')
+            .addClass('mt-3 forecast')
             .append(h3El, divForecastBlocksEl)
 
         $('#current-weather-container').append(divForecastEl);
@@ -185,7 +182,6 @@ var populateHistory = function() {
 
     }
 }
-
 populateHistory();
 
 // search button click functionality
@@ -196,8 +192,6 @@ const historyButtonEl = $('.history-btn');
 historyButtonEl.on('click', function(event) {
     const id = event.target.id
     var city = historyButtonEl[id].textContent
-    console.log(city);
     citySearchString = city;
     callCityAPI(city);
 })
-

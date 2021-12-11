@@ -5,16 +5,42 @@ header {
 .forecast-day {
     color: white;
     background-color: midnightblue;
-    width: 15%;
+    width: 18%;
 }
 
 .current-weather {
     background-color: midnightblue;
     color: white;
+
+}
+
+@media (max-width: 980px) {
+    .forecast-day{
+        width: 25%;
+    }
+    .current-weather{
+        width: 100%;
+        margin-bottom: 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    .forecast-day{
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    .current-weather{
+        width: 100%;
+        margin-bottom: 5%;
+    }
 }
 
 @media (max-width: 576px) {
-    .forecast-day {
+    .forecast-day{
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    .current-weather{
         width: 100%;
         margin-bottom: 5%;
     }
