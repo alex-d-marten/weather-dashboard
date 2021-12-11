@@ -22,7 +22,7 @@ retrieveHistory();
 
 // function to gather weather conditions based on the city lat and long provided from the geocoding api
 var callWeatherAPI = function(cityLat, cityLong) {
-    var currentWeatherAPICall = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${'alerts,hourly,minutely'}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
+    var currentWeatherAPICall = `http://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLong}&units=${'imperial'}&exclude=${'alerts,hourly,minutely'}&appid=${'94e32ddc97880c45b19a69dfc85aec8d'}`;
     fetch(currentWeatherAPICall)
         .then(response => response.json())
         .then(function(data) {
