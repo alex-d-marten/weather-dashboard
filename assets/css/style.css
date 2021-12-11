@@ -4,12 +4,12 @@ header {
 
 .forecast-day {
     color: white;
-    background-color: midnightblue;
+    background-color: royalblue;
     width: 18%;
 }
 
 .current-weather {
-    background-color: midnightblue;
+    background-color:royalblue;
     color: white;
 
 }

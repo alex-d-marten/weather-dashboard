@@ -120,6 +120,15 @@ var renderCurrentWeatherContent = function(currentWeather, data) {
     pEl4
         .addClass('fw-bold')
         .text('UVI: ' + `${currentWeather.uvi}`)
+    if(currentWeather.uvi <= 2) {
+        pEl4.addClass('text-success');
+    }
+    else if(currentWeather.uvi <= 5) {
+        pEl4.addClass('text-warning')
+    }
+    else {
+        pEl4.addClass('text-danger')
+    }
     divEl.append(pEl4);
     $('#current-weather-container').prepend(divEl);
 }
