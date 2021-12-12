@@ -7,7 +7,7 @@ This repository contains JavaScript, HTML, and CSS that together form a working 
 https://alex-d-marten.github.io/weather-dashboard/
 
 ## Screenshot of webpage with weather
-![webpage screenshot](https://github.com/alex-d-marten/weather-dashboard/blob/main/assets/images/Weather%20Dashboard%20Screenshot.png)
+![webpage screenshot](https://github.com/alex-d-marten/weather-dashboard/blob/main/assets/Images/Weather%20Dashboard%20Screenshot.png)
 
 ## Webpage in action
-![webpage gif](https://github.com/alex-d-marten/weather-dashboard/blob/main/assets/images/Weather%20Dashboard%20in%20Action.gif)
+![webpage gif](https://github.com/alex-d-marten/weather-dashboard/blob/main/assets/Images/Weather%20Dashboard%20in%20Action.gif)
