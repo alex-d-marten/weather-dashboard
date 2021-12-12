@@ -14,6 +14,10 @@ header {
 
 }
 
+.uvi-good {
+    color: rgb(57, 200, 0);
+}
+
 @media (max-width: 980px) {
     .forecast-day{
         width: 25%;

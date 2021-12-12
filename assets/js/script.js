@@ -116,7 +116,7 @@ var renderCurrentWeatherContent = function(currentWeather, data) {
         .text('UVI: ' + `${currentWeather.uvi}`)
 
     if(currentWeather.uvi <= 2) {
-        pEl4.addClass('text-success');
+        pEl4.addClass('uvi-good');
     }
     else if(currentWeather.uvi <= 5) {
         pEl4.addClass('text-warning')
